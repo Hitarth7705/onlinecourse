@@ -2,21 +2,35 @@ from django.contrib import admin
 from .models import Course, Lesson, Enrollment, Question, Choice, Submission
 from django.contrib.auth.models import User
 
+
 class ChoiceInline(admin.TabularInline):
     model = Choice
-    extra = 2
+    extra = 3
+
 
 class QuestionInline(admin.TabularInline):
     model = Question
-    extra = 1
+    extra = 2
+
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
+    list_display = ('question_text', 'lesson', 'grade')
+
 
 class LessonAdmin(admin.ModelAdmin):
+    list_display = ('title', 'course')
     inlines = [QuestionInline]
 
-admin.site.register(Course)
+
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+    list_filter = ('name',)
+    inlines = [LessonInline] if 'LessonInline' in globals() else []
+
+
+admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Enrollment)
 admin.site.register(Question, QuestionAdmin)
