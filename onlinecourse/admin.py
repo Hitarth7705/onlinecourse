@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Course, Lesson, Enrollment, Question, Choice, Submission
 from django.contrib.auth.models import User
+from .models import Instructor, Learner
+
+admin.site.register(Instructor)
+admin.site.register(Learner)
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
