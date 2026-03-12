@@ -13,7 +13,6 @@ class Enrollment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
 class Question(models.Model):
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=200)
     grade = models.IntegerField()
 
@@ -33,4 +32,8 @@ class Instructor(models.Model):
 
 class Learner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+<<<<<<< HEAD
     occupation = models.CharField(max_length=150)
+=======
+    occupation = models.CharField(max_length=150)
+>>>>>>> 5de256335b71085e60b654c22e944ea7265e2d7e
